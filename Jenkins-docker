@@ -23,24 +23,24 @@ pipeline{
             steps{
                   nexusArtifactUploader artifacts: [
                        [
-                            artifactId: 'myweb', 
-                            classifier: '', 
-                            file: "target/myweb-8.2.0.war", 
-                            type: 'war'
-                       ]
-                  ], 
-                  credentialsId: 'nexus3', 
-                  groupId: 'in.javahome', 
-                  nexusUrl: '172.31.82.10:8081', 
-                  nexusVersion: 'nexus3', 
-                  protocol: 'http', 
-                  repository: 'facebook-release', 
-                  version: '8.2.0'  
+                           artifactId: 'myweb',
+ classifier: '',
+ file: 'target/myweb-3.65.0.war', 
+type: 'war'
+]
+],
+ credentialsId: 'nexus-cred',
+ groupId: 'in.javahome',
+ nexusUrl: '18.205.23.194:8081',
+ nexusVersion: 'nexus3',
+ protocol: 'http',
+ repository: 'facebook-release',
+ version: '3.65.0'  
               }
             }
         stage('Build Docker Image'){
             steps{
-                 sh 'docker build -t harishhr/spring-boot-mongo .'
+                 sh 'docker build -t harishhr/spring-boot.'
                  sh 'docker build -t tomcat:${BUILD_NUMBER} .'
                  sh 'docker run -itd --name srini36 -p 2900:8080 tomcat:${BUILD_NUMBER}'
              }
@@ -50,7 +50,7 @@ pipeline{
                   withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
                       sh "docker login -u harishahr -p ${DOCKER_HUB_CREDENTIALS}"
             }
-            sh 'docker push harishahr/spring-boot-mongo'
+            sh 'docker push harishahr/spring-boot'
         }
       }
         
