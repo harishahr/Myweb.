@@ -19,10 +19,10 @@ pipeline{
                 
             }
         }
-     //sonarqube report
-stage('sonarqubereport'){
-    steps{
-        sh "mvn sonar:sonar"
+     
+       stage('sonarqubereport'){
+        steps{
+         sh "mvn sonar:sonar"
     }
 }
 
