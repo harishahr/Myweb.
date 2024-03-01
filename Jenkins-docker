@@ -15,10 +15,19 @@ pipeline{
         }
         stage("Maven Build"){
             steps{
-                sh "mvn clean package sonar:sonar "
+                sh "mvn clean package"
                 
             }
         }
+     //sonarqube report
+stage('sonarqubereport'){
+    steps{
+        sh "mvn sonar:sonar"
+    }
+}
+
+
+
         stage('Upload War To Nexus'){
             steps{
                   nexusArtifactUploader artifacts: [
