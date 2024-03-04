@@ -30,7 +30,7 @@ pipeline{
             ],
                          credentialsId: 'nexus-cred',
                          groupId: 'in.javahome',
-                         nexusUrl: '18.205.23.194:8081',
+                         nexusUrl: '172.31.82.10:8081',
                          nexusVersion: 'nexus3',
                          protocol: 'http',
                          repository: 'facebook-release',
